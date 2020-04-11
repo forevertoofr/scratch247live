@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Scratch API Proxy</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/cdn-cgi/apps/head/Ko3M6yhNP1bYIEQ7OfjdDrn0_qE.js"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<meta name="title" content="Scratch CORS API Proxy">
+<meta name="description" content="Cross-Origin API for Scratch">
+</head>
+<body>
+<div class="jumbotron text-center">
+<h1>Scratch LIVE 24/7</h1>
+<b>The stats live !</b>
+<p>Created by <a href='https://scratch.mit.edu/users/DatOneLefty'>DatOneLefty</a> and modified by <a href="https://github.com/haydenledean">haydenledean</a> !</p>
+</div>
+<div class="container">
+<div class="row">
+<center><h3>Requests in Last Hour of Scratch.</h3>
+<h1 id='total'>Refreshing...</h1>
+</div>
+<div class="row">
+</div>
+</div>
+</body>
+</html>
+<script>
+  function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
+}
+httpGetAsync("https://api.scratchnotifier.cf/siteapi", (res) => {
+  console.log(res);
+  document.getElementById("total").innerHTML = JSON.parse(res).lasthour + " requests"
+});
+</script>
+<script>
+setTimeout(function(){ javascript:history.go(0) }, 5000);
+</script>
